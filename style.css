@@ -1,0 +1,233 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.main-div {
+    background: wheat;
+    width: 1366px;
+    height: 657px;
+}
+
+.ludo-div {
+    position: absolute;
+    width: 55%;
+    background: white;
+    height: 100%;
+    left: 22.5%;
+}
+
+#board {
+    height: 100%;
+    width: 100%;
+}
+
+.green-div {
+    position: absolute;
+    /* background: wheat; */
+    width: 153px;
+    height: 125px;
+    top: 77px;
+    left: 84px;
+    display: flex;
+}
+
+.yellow-div {
+    position: absolute;
+    top: 79px;
+    right: 88px;
+    width: 154px;
+    z-index: 1;
+    height: 129px;
+}
+
+
+
+.blue-div {
+    position: absolute;
+    top: 448px;
+    right: 87px;
+    width: 154px;
+    z-index: 1;
+    height: 130px;
+}
+
+.button {
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.inner-button {
+}
+
+.green {
+    background: green;
+}
+
+.yellow {
+    background: yellow;
+}
+
+.green.one {
+    left: 16px;
+    top: 13px;
+}
+
+.green.two {
+    top: 84px;
+    left: 17px;
+}
+
+.green.three {
+    top: 14px;
+    left: 105px;
+}
+
+.green.four {
+    right: 18px;
+    bottom: 11px;
+}
+
+.yellow.one {
+    right: 17px;
+    top: 10px;
+}
+
+.yellow.two {
+    bottom: 14px;
+    right: 16px;
+}
+
+.yellow.three {
+    bottom: 15px;
+    left: 14px;
+}
+
+.yellow.four {
+    top: 10px;
+    left: 13px;
+}
+
+.blue {
+    background: blue;
+}
+
+.red {
+    background-color: darkred;
+}
+
+
+
+.blue.one {
+    right: 17px;
+    top: 10px;
+}
+
+.blue.two {
+    bottom: 14px;
+    right: 16px;
+}
+
+.blue.three {
+    bottom: 15px;
+    left: 14px;
+}
+
+.blue.four {
+    top: 10px;
+    left: 13px;
+}
+
+.dice-container {
+    position: absolute;
+    top: 268px;
+    width: 138px;
+    height: 121px;
+    left: 307px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dice {
+    cursor: pointer;
+    padding: 28px;
+    font-size: 53px;
+    z-index: 2;
+}
+
+.box-div {
+    position: absolute;
+    width: 99%;
+    height: 100%;
+    left: 0.5%;
+    top: 0px;
+}
+
+.red-start-box {
+    position: absolute;
+    width: 24px;
+    height: 23px;
+}
+
+.red-area {
+}
+
+.box {
+    width: 24px;
+    height: 23px;
+}
+
+.one.red-area {
+    position: absolute;
+}
+
+.two.red-area {
+    position: absolute;
+}
+
+.three.red-area {
+    position: absolute;
+}
+
+.four.red-area {
+    position: absolute;
+}
+
+.five.red-area {
+    position: absolute;
+}
+
+.six.red-area {
+    position: absolute;
+}
+
+.seven.red-area {
+    position: absolute;
+}
+
+.eight.red-area {
+    position: absolute;
+}
+
+.nine.red-area {
+    position: absolute;
+}
+
+.ten.red-area {
+    position: absolute;
+}
+
+.enter.red-area {
+    position: absolute;
+}
+
+.previous.red-area {
+    position: absolute;
+}
