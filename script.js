@@ -25,7 +25,7 @@ oneField.position.left = startRed.style.left;
 oneField.present = 0;
 redField.push(oneField);
 
-let boxTypes = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+let boxTypes = ["red-start-box", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 for(let i=0;i<boxTypes.length;i++){
   let pos = boxTypes[i];
   let oneField = {
@@ -58,6 +58,5 @@ playDice.addEventListener("click", function(e){
       threeRed.style.bottom = redField[presentr1].position.bottom;
       threeRed.style.left = redField[presentr1].position.left;
     }
-                 
 });
 
