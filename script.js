@@ -49,7 +49,7 @@ playDice.addEventListener("click", function(e){
       presentr1 = 0;
       threeRed.style.bottom = redField[0].position.bottom;
       threeRed.style.left = redField[0].position.left ;
-      redField[0].position=1;
+      redField[0].present=1;
     }
     else if(threeRed.classList.contains("active") && presentr1+idx<11){
       redField[presentr1].present -=1;
