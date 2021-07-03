@@ -184,50 +184,6 @@
     height: 23px;
 }
 
-.one.red-area {
-    position: absolute;
-}
-
-.two.red-area {
-    position: absolute;
-}
-
-.three.red-area {
-    position: absolute;
-}
-
-.four.red-area {
-    position: absolute;
-}
-
-.five.red-area {
-    position: absolute;
-}
-
-.six.red-area {
-    position: absolute;
-}
-
-.seven.red-area {
-    position: absolute;
-}
-
-.eight.red-area {
-    position: absolute;
-}
-
-.nine.red-area {
-    position: absolute;
-}
-
-.ten.red-area {
-    position: absolute;
-}
-
-.enter.red-area {
-    position: absolute;
-}
-
-.previous.red-area {
+.red-area{
     position: absolute;
 }

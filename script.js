@@ -13,7 +13,6 @@ let oneRed = document.querySelector(".button.red.one");
 let twoRed = document.querySelector(".button.red.two");
 let threeRed = document.querySelector(".button.red.three");
 let fourRed = document.querySelector(".button.red.four");
-let boxTypes = ["one", "two", "three", "four", "five", siz]
 
 let oneField = {
   "position" : {"bottom": 0, "left": 0},
@@ -26,16 +25,38 @@ oneField.position.left = startRed.style.left;
 oneField.present = 0;
 redField.push(oneField);
 
+let boxTypes = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+for(let i=0;i<boxTypes.length;i++){
+  let pos = boxTypes[i];
+  let oneField = {
+    "position" : {"bottom": 0, "left": 0},
+    "present": 0
+  };
+  let selectClass = document.querySelector(`.${pos}.red-area`);
+  oneField.position.bottom= selectClass.style.bottom;
+  console.log(pos);
+  oneField.position.left = selectClass.style.left;
+  redField.push(oneField);    
+}
+
+let presentr1;
 playDice.addEventListener("click", function(e){
     let idx = dice.roll();
     playDice.innerHTML = idx;
-    if(idx==6){
+    if(idx==6 && threeRed.classList.contains("inactive")){
       threeRed.classList.add("active");
-        threeRed.style.bottom = redField[0].position.bottom;
-        threeRed.style.left = redField[0].position.left ;
+      threeRed.classList.remove("inactive");
+      presentr1 = 0;
+      threeRed.style.bottom = redField[0].position.bottom;
+      threeRed.style.left = redField[0].position.left ;
+      redField[0].position=1;
     }
-    if(threeRed.classList.contains("active")){
-
+    else if(threeRed.classList.contains("active") && presentr1+idx<11){
+      redField[presentr1].present -=1;
+      presentr1+=idx;
+      redField[presentr1].present +=1;
+      threeRed.style.bottom = redField[presentr1].position.bottom;
+      threeRed.style.left = redField[presentr1].position.left;
     }
                  
 });
