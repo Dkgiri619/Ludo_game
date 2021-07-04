@@ -72,13 +72,6 @@
     top: 0px;
 }
 
-.red-start-box {
-    position: absolute;
-    width: 24px;
-    height: 23px;
-}
-
-
 .box {
     width: 24px;
     height: 23px;
@@ -88,29 +81,17 @@
     position: absolute;
 }
 
-.green-start-box{
-    width: 24px;
-    height: 23px;
-    position: absolute;
-}
+
 .green-area{
     position: absolute;
 }
 
-.yellow-start-box{
-    width: 24px;
-    height: 23px;
-    position: absolute;
-}
+
 .yellow-area{
     position: absolute;
 }
 
-.blue-start-box{
-    width: 24px;
-    height: 23px;
-    position: absolute;
-}
+
 .blue-area{
     position: absolute;
    

@@ -14,18 +14,10 @@ let twoRed = document.querySelector(".button.red.two");
 let threeRed = document.querySelector(".button.red.three");
 let fourRed = document.querySelector(".button.red.four");
 
-let oneField = {
-  "position" : {"bottom": 0, "left": 0},
-  "present": 0
-};
-let startRed = document.querySelector(".red-start-box");
 
-oneField.position.bottom= startRed.style.bottom;
-oneField.position.left = startRed.style.left;
-oneField.present = 0;
-redField.push(oneField);
+let boxTypes = ["start", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 
-let boxTypes = ["red-start-box", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+//redfield update
 for(let i=0;i<boxTypes.length;i++){
   let pos = boxTypes[i];
   let oneField = {
