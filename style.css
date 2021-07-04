@@ -89,8 +89,19 @@
 }
 
 .green-start-box{
-    
+    width: 24px;
+    height: 23px;
+    position: absolute;
 }
 .green-area{
+    position: absolute;
+}
+
+.yellow-start-box{
+    width: 24px;
+    height: 23px;
+    position: absolute;
+}
+.yellow-area{
     position: absolute;
 }
