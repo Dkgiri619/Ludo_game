@@ -88,5 +88,9 @@
     position: absolute;
 }
 
-.green-start-box{}
-.green-area{}
+.green-start-box{
+    
+}
+.green-area{
+    position: absolute;
+}
