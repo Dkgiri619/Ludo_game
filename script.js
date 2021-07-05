@@ -183,7 +183,7 @@ let yellowPresentIdx = [0,0,0,0];
 let bluePresentIdx = [0,0,0,0];
 
 let turn = 0;
-
+let moves = 0;
 function redEventListner() {
   oneRed.addEventListener("click", function (e) {
     moveForward(e, redField, redPresentIdx);
@@ -250,7 +250,9 @@ playDice.addEventListener("click", function (e) {
   let idx = dice.roll();
   playDice.innerHTML = idx;
   turn = 1;
-  colorEventListner[2]();
+  colorEventListner[moves]();
+  console.log(moves);
+  moves=(moves+1)%4;
 });
 
 
