@@ -1,3 +1,5 @@
+
+// Dice function //
 let playDice = document.querySelector(".dice");
 
 var dice = {
@@ -7,6 +9,8 @@ var dice = {
     return randomNumber;
   }
 }
+// ------------ // 
+
 
 let boxTypes = ["start", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 let finalBox = ["one", "two", "three", "four", "five"];
@@ -21,8 +25,21 @@ let oneRed = document.querySelector(".button.red.one");
 let twoRed = document.querySelector(".button.red.two");
 let threeRed = document.querySelector(".button.red.three");
 let fourRed = document.querySelector(".button.red.four");
-
-
+// green buttons
+let oneGreen = document.querySelector(".button.green.one");
+let twoGreen = document.querySelector(".button.green.two");
+let threeGreen = document.querySelector(".button.green.three");
+let fourGreen = document.querySelector(".button.green.four");
+// yellow buttons
+let oneYellow = document.querySelector(".button.yellow.one");
+let twoYellow = document.querySelector(".button.yellow.two");
+let threeYellow = document.querySelector(".button.yellow.three");
+let fourYellow = document.querySelector(".button.yellow.four");
+// blue buttons
+let oneBlue = document.querySelector(".button.blue.one");
+let twoBlue = document.querySelector(".button.blue.two");
+let threeBlue = document.querySelector(".button.blue.three");
+let fourBlue = document.querySelector(".button.blue.four");
 
 function finalTypeBoxes(selector, db) {
   for (let i = 0; i < finalBox.length; i++) {
@@ -94,7 +111,7 @@ function updateEnterPrev(selector, db) {
 
 })();
 
-(function updateGreenField(){
+(function updateGreenField() {
   updateBoxTypes("green-area", greenField);
   updateEnterPrev("yellow-area", greenField);
   updateBoxTypes("yellow-area", greenField);
@@ -113,7 +130,7 @@ function updateEnterPrev(selector, db) {
   finalTypeBoxes("green-area", greenField);
 })();
 
-(function updateYellowField(){
+(function updateYellowField() {
   updateBoxTypes("yellow-area", yellowField);
   updateEnterPrev("blue-area", yellowField);
   updateBoxTypes("blue-area", yellowField);
@@ -132,7 +149,7 @@ function updateEnterPrev(selector, db) {
   finalTypeBoxes("yellow-area", yellowField);
 })();
 
-(function updateBlueField(){
+(function updateBlueField() {
   updateBoxTypes("blue-area", blueField);
   updateEnterPrev("red-area", blueField);
   updateBoxTypes("red-area", blueField);
@@ -151,89 +168,136 @@ function updateEnterPrev(selector, db) {
   finalTypeBoxes("blue-area", blueField);
 })();
 
-let  isPresentAt = function(){
+// check buttons position
+function isPresentAt(db) {
   for (let i = 0; i < redField.length; i++) {
-    if (redField[i].present == 1) {
+    if (db[i].present == 1) {
       console.log(i);
     }
   }
 }
 
-let presentr1 = 0;
-let presentr2 = 0;
-let presentr3 = 0;
-let presentr4 = 0;
+let redPresentIdx = [0,0,0,0];
+let greenPresentIdx = [0,0,0,0];
+let yellowPresentIdx = [0,0,0,0];
+let bluePresentIdx = [0,0,0,0];
 
 let turn = 0;
 
+function redEventListner() {
+  oneRed.addEventListener("click", function (e) {
+    moveForward(e, redField, redPresentIdx);
+  }, { once: true });
+  twoRed.addEventListener("click", function (e) {
+    moveForward(e, redField, redPresentIdx);
+  }, { once: true });
+  threeRed.addEventListener("click", function (e) {
+    moveForward(e, redField, redPresentIdx);
+  }, { once: true });
+  fourRed.addEventListener("click", function (e) {
+    moveForward(e, redField, redPresentIdx);
+  }, { once: true });
+}
+
+function greenEventListner() {
+  oneGreen.addEventListener("click", function (e) {
+    moveForward(e, greenField, greenPresentIdx);
+  }, { once: true });
+  twoGreen.addEventListener("click", function (e) {
+    moveForward(e, greenField, greenPresentIdx);
+  }, { once: true });
+  threeGreen.addEventListener("click", function (e) {
+    moveForward(e, greenField, greenPresentIdx);
+  }, { once: true });
+  fourGreen.addEventListener("click", function (e) {
+    moveForward(e, greenField, greenPresentIdx);
+  }, { once: true });
+}
+
+function yellowEventListner() {
+  oneYellow.addEventListener("click", function (e) {
+    moveForward(e, yellowField, yellowPresentIdx);
+  }, { once: true });
+  twoYellow.addEventListener("click", function (e) {
+    moveForward(e, yellowField, yellowPresentIdx);
+  }, { once: true });
+  threeYellow.addEventListener("click", function (e) {
+    moveForward(e, yellowField, yellowPresentIdx);
+  }, { once: true });
+  fourYellow.addEventListener("click", function (e) {
+    moveForward(e, yellowField, yellowPresentIdx);
+  }, { once: true });
+}
+
+function blueEventListner() {
+  oneBlue.addEventListener("click", function (e) {
+    moveForward(e, blueField, bluePresentIdx);
+  }, { once: true });
+  twoBlue.addEventListener("click", function (e) {
+    moveForward(e, blueField, bluePresentIdx);
+  }, { once: true });
+  threeBlue.addEventListener("click", function (e) {
+    moveForward(e, blueField, bluePresentIdx);
+  }, { once: true });
+  fourBlue.addEventListener("click", function (e) {
+    moveForward(e, blueField, bluePresentIdx);
+  }, { once: true });
+}
+let colorEventListner = [redEventListner, greenEventListner, yellowEventListner, blueEventListner];
 
 
 playDice.addEventListener("click", function (e) {
   let idx = dice.roll();
   playDice.innerHTML = idx;
-  turn=1;
-  redEventListner();
+  turn = 1;
+  colorEventListner[2]();
 });
 
-function redEventListner() {
-  oneRed.addEventListener("click", function (e) {
-    moveForward(e);
-  }, { once: true });
-  twoRed.addEventListener("click", function (e) {
-    moveForward(e);
-  }, { once: true });
-  threeRed.addEventListener("click", function (e) {
-    moveForward(e);
-  }, { once: true });
-  fourRed.addEventListener("click", function (e) {
-    moveForward(e);
-  }, { once: true });
-}
 
-function moveForward(e) {
-  if(turn!=1){
+
+function moveForward(e, db, presentIdx) {
+  if (turn != 1) {
     return;
   }
   let index = parseInt(document.querySelector(".dice").innerHTML);
   if (index == 6 && e.target.classList.contains("inactive")) {
     e.target.classList.remove("inactive");
     e.target.classList.add("active");
-    e.srcElement.style.bottom = redField[0].position.bottom;
-    e.srcElement.style.left = redField[0].position.left;
-    redField[0].present += 1;
+    e.srcElement.style.bottom = db[0].position.bottom;
+    e.srcElement.style.left = db[0].position.left;
+    db[0].present += 1;
     turn = 0;
   }
   else if (e.target.classList.contains("active")) {
-    let pos = updatePosition(e, index);
-    redField[pos].present += 1;
-    console.log(pos);
-    e.srcElement.style.bottom = redField[pos].position.bottom;
-    e.srcElement.style.left = redField[pos].position.left;
+    let pos = updatePosition(e, index, db, presentIdx);
+    db[pos].present += 1;
+    e.srcElement.style.bottom = db[pos].position.bottom;
+    e.srcElement.style.left = db[pos].position.left;
     turn = 0;
   }
 }
 
 
-function updatePosition(e, index){
+function updatePosition(e, index, db, presentIdx) {
   let pos;
   if (e.target.classList.contains("one")) {
-    redField[presentr1].present -= 1;
-    presentr1 += index;
-    pos = presentr1;
+    db[presentIdx[0]].present -= 1;
+    presentIdx[0] += index;
+    pos = presentIdx[0];
   } else if (e.target.classList.contains("two")) {
-    redField[presentr2].present -= 1;
-    presentr2 += index;
-    pos = presentr2;
+    db[presentIdx[1]].present -= 1;
+    presentIdx[1] += index;
+    pos = presentIdx[1];
   }
   else if (e.target.classList.contains("three")) {
-    redField[presentr3].present -= 1;
-    presentr3 += index;
-    pos = presentr3;
+    db[presentIdx[2]].present -= 1;
+    presentIdx[2] += index;
+    pos = presentIdx[2];
   }
   else {
-    redField[presentr4].present -= 1;
-    presentr4 += index;
-    pos = presentr4;
+    db[presentIdx[3]].present -= 1;
+    presentIdx[3] += index;
+    pos = presentIdx[3];
   }
   return pos;
 }
