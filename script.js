@@ -8,17 +8,21 @@ var dice = {
   }
 }
 
-
 let boxTypes = ["start", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 let finalBox = ["one", "two", "three", "four", "five"];
 
 let redField = [];
+let greenField = [];
+let yellowField = [];
+let blueField = [];
 
 //red buttons
 let oneRed = document.querySelector(".button.red.one");
 let twoRed = document.querySelector(".button.red.two");
 let threeRed = document.querySelector(".button.red.three");
 let fourRed = document.querySelector(".button.red.four");
+
+
 
 function finalTypeBoxes(selector, db) {
   for (let i = 0; i < finalBox.length; i++) {
@@ -34,7 +38,7 @@ function finalTypeBoxes(selector, db) {
   }
 }
 
-function updateBoxTypes(selector) {
+function updateBoxTypes(selector, db) {
   for (let i = 0; i < boxTypes.length; i++) {
     let pos = boxTypes[i];
     let oneField = {
@@ -45,11 +49,11 @@ function updateBoxTypes(selector) {
     oneField.position.bottom = selectClass.style.bottom;
     // console.log(pos);
     oneField.position.left = selectClass.style.left;
-    redField.push(oneField);
+    db.push(oneField);
   }
 }
 
-function updateEnterPrev(selector) {
+function updateEnterPrev(selector, db) {
   let oneField = {
     "position": { "bottom": 0, "left": 0 },
     "present": 0
@@ -57,7 +61,7 @@ function updateEnterPrev(selector) {
   let enterClass = document.querySelector(`.enter.${selector}`);
   oneField.position.bottom = enterClass.style.bottom;
   oneField.position.left = enterClass.style.left;
-  redField.push(oneField);
+  db.push(oneField);
   let otherField = {
     "position": { "bottom": 0, "left": 0 },
     "present": 0
@@ -66,18 +70,18 @@ function updateEnterPrev(selector) {
   let previousClass = document.querySelector(`.previous.${selector}`);
   otherField.position.bottom = previousClass.style.bottom;
   otherField.position.left = previousClass.style.left;
-  redField.push(otherField);
+  db.push(otherField);
 }
 
-//redfield update
+// db update
 (function updateRedField() {
-  updateBoxTypes("red-area");
-  updateEnterPrev("green-area");
-  updateBoxTypes("green-area");
-  updateEnterPrev("yellow-area");
-  updateBoxTypes("yellow-area");
-  updateEnterPrev("blue-area");
-  updateBoxTypes("blue-area");
+  updateBoxTypes("red-area", redField);
+  updateEnterPrev("green-area", redField);
+  updateBoxTypes("green-area", redField);
+  updateEnterPrev("yellow-area", redField);
+  updateBoxTypes("yellow-area", redField);
+  updateEnterPrev("blue-area", redField);
+  updateBoxTypes("blue-area", redField);
   let oneField = {
     "position": { "bottom": 0, "left": 0 },
     "present": 0
@@ -90,7 +94,65 @@ function updateEnterPrev(selector) {
 
 })();
 
-function isPresentAt() {
+(function updateGreenField(){
+  updateBoxTypes("green-area", greenField);
+  updateEnterPrev("yellow-area", greenField);
+  updateBoxTypes("yellow-area", greenField);
+  updateEnterPrev("blue-area", greenField);
+  updateBoxTypes("blue-area", greenField);
+  updateEnterPrev("red-area", greenField);
+  updateBoxTypes("red-area", greenField);
+  let oneField = {
+    "position": { "bottom": 0, "left": 0 },
+    "present": 0
+  };
+  let enterredClass = document.querySelector(".enter.green-area");
+  oneField.position.bottom = enterredClass.style.bottom;
+  oneField.position.left = enterredClass.style.left;
+  greenField.push(oneField);
+  finalTypeBoxes("green-area", greenField);
+})();
+
+(function updateYellowField(){
+  updateBoxTypes("yellow-area", yellowField);
+  updateEnterPrev("blue-area", yellowField);
+  updateBoxTypes("blue-area", yellowField);
+  updateEnterPrev("red-area", yellowField);
+  updateBoxTypes("red-area", yellowField);
+  updateEnterPrev("green-area", yellowField);
+  updateBoxTypes("green-area", yellowField);
+  let oneField = {
+    "position": { "bottom": 0, "left": 0 },
+    "present": 0
+  };
+  let enterredClass = document.querySelector(".enter.yellow-area");
+  oneField.position.bottom = enterredClass.style.bottom;
+  oneField.position.left = enterredClass.style.left;
+  yellowField.push(oneField);
+  finalTypeBoxes("yellow-area", yellowField);
+})();
+
+(function updateBlueField(){
+  updateBoxTypes("blue-area", blueField);
+  updateEnterPrev("red-area", blueField);
+  updateBoxTypes("red-area", blueField);
+  updateEnterPrev("green-area", blueField);
+  updateBoxTypes("green-area", blueField);
+  updateEnterPrev("yellow-area", blueField);
+  updateBoxTypes("yellow-area", blueField);
+  let oneField = {
+    "position": { "bottom": 0, "left": 0 },
+    "present": 0
+  };
+  let enterredClass = document.querySelector(".enter.blue-area");
+  oneField.position.bottom = enterredClass.style.bottom;
+  oneField.position.left = enterredClass.style.left;
+  blueField.push(oneField);
+  finalTypeBoxes("blue-area", blueField);
+})();
+
+let  isPresentAt = function(){
+  
   for (let i = 0; i < redField.length; i++) {
     if (redField[i].present == 1) {
       console.log(i);
@@ -143,26 +205,7 @@ function moveForward(e) {
     turn = 0;
   }
   else if (e.target.classList.contains("active")) {
-    let pos;
-    if (e.target.classList.contains("one")) {
-      redField[presentr1].present -= 1;
-      presentr1 += index;
-      pos = presentr1;
-    } else if (e.target.classList.contains("two")) {
-      redField[presentr2].present -= 1;
-      presentr2 += index;
-      pos = presentr2;
-    }
-    else if (e.target.classList.contains("three")) {
-      redField[presentr3].present -= 1;
-      presentr3 += index;
-      pos = presentr3;
-    }
-    else {
-      redField[presentr4].present -= 1;
-      presentr4 += index;
-      pos = presentr4;
-    }
+    let pos = updatePosition(e, index);
     redField[pos].present += 1;
     console.log(pos);
     e.srcElement.style.bottom = redField[pos].position.bottom;
@@ -171,3 +214,27 @@ function moveForward(e) {
   }
 }
 
+
+function updatePosition(e, index){
+  let pos;
+  if (e.target.classList.contains("one")) {
+    redField[presentr1].present -= 1;
+    presentr1 += index;
+    pos = presentr1;
+  } else if (e.target.classList.contains("two")) {
+    redField[presentr2].present -= 1;
+    presentr2 += index;
+    pos = presentr2;
+  }
+  else if (e.target.classList.contains("three")) {
+    redField[presentr3].present -= 1;
+    presentr3 += index;
+    pos = presentr3;
+  }
+  else {
+    redField[presentr4].present -= 1;
+    presentr4 += index;
+    pos = presentr4;
+  }
+  return pos;
+}
