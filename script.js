@@ -152,7 +152,6 @@ function updateEnterPrev(selector, db) {
 })();
 
 let  isPresentAt = function(){
-  
   for (let i = 0; i < redField.length; i++) {
     if (redField[i].present == 1) {
       console.log(i);
