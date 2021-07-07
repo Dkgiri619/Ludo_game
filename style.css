@@ -96,3 +96,14 @@
     position: absolute;
    
 }
+.selection{
+    animation-name: activated;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes activated {
+    50%{
+        border: 5px solid black;
+    }
+}

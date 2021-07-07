@@ -1,7 +1,7 @@
 
 // Dice function //
 let playDice = document.querySelector(".dice");
-
+let diceBg = document.querySelector(".dice-container");
 var dice = {
   sides: 6,
   roll: function () {
@@ -14,6 +14,8 @@ var dice = {
 
 let boxTypes = ["start", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 let finalBox = ["one", "two", "three", "four", "five"];
+let colors = ["red", "green", "yellow", "blue"];
+
 
 let redField = [];
 let greenField = [];
@@ -40,6 +42,9 @@ let oneBlue = document.querySelector(".button.blue.one");
 let twoBlue = document.querySelector(".button.blue.two");
 let threeBlue = document.querySelector(".button.blue.three");
 let fourBlue = document.querySelector(".button.blue.four");
+
+let allButtons = [oneRed, twoRed, threeRed, fourRed, oneGreen, twoGreen, threeGreen, fourGreen, oneYellow, twoYellow, 
+  threeYellow, fourYellow, oneBlue, twoBlue, threeBlue, fourBlue];
 
 function finalTypeBoxes(selector, db) {
   for (let i = 0; i < finalBox.length; i++) {
@@ -177,129 +182,228 @@ function isPresentAt(db) {
   }
 }
 
-let redPresentIdx = [0,0,0,0];
-let greenPresentIdx = [0,0,0,0];
-let yellowPresentIdx = [0,0,0,0];
-let bluePresentIdx = [0,0,0,0];
+let redPresentIdx = [-1, -1, -1, -1, "r"];
+let greenPresentIdx = [-1, -1, -1, -1, "g"];
+let yellowPresentIdx = [-1, -1, -1, -1, "y"];
+let bluePresentIdx = [-1, -1, -1, -1, "b"];
 
 let turn = 0;
 let moves = 0;
+
+function inRed(e) {
+  moveForward(e, redField, redPresentIdx);
+}
+function inGreen(e) {
+  moveForward(e, greenField, greenPresentIdx);
+}
+function inYellow(e) {
+  moveForward(e, yellowField, yellowPresentIdx);
+}
+function inBlue(e) {
+  moveForward(e, blueField, bluePresentIdx);
+}
+function checkForActive(presentIdx){
+  for(let i =0 ;i<presentIdx.length-1;i++){
+    if(presentIdx[i]!=-1)return true;
+  }
+  return false;
+}
 function redEventListner() {
-  oneRed.addEventListener("click", function (e) {
-    moveForward(e, redField, redPresentIdx);
-  }, { once: true });
-  twoRed.addEventListener("click", function (e) {
-    moveForward(e, redField, redPresentIdx);
-  }, { once: true });
-  threeRed.addEventListener("click", function (e) {
-    moveForward(e, redField, redPresentIdx);
-  }, { once: true });
-  fourRed.addEventListener("click", function (e) {
-    moveForward(e, redField, redPresentIdx);
-  }, { once: true });
+  let index = parseInt(document.querySelector(".dice").innerHTML);
+  if(index!=6 && !checkForActive(redPresentIdx)){
+    moves = (moves+1)%4;  
+    setTimeout(5000);
+    updateDiceColor();
+  }
+  else if(index==6){
+    oneRed.addEventListener("click", inRed);
+    twoRed.addEventListener("click", inRed);
+    threeRed.addEventListener("click", inRed);
+    fourRed.addEventListener("click", inRed);
+  }
+  else{
+    if(oneRed.classList.contains("active"))
+      oneRed.addEventListener("click", inRed);
+    if(twoRed.classList.contains("active"))  
+      twoRed.addEventListener("click", inRed);
+    if(threeRed.classList.contains("active"))
+      threeRed.addEventListener("click", inRed);
+    if(fourRed.classList.contains("active"))
+      fourRed.addEventListener("click", inRed);
+  }
 }
 
 function greenEventListner() {
-  oneGreen.addEventListener("click", function (e) {
-    moveForward(e, greenField, greenPresentIdx);
-  }, { once: true });
-  twoGreen.addEventListener("click", function (e) {
-    moveForward(e, greenField, greenPresentIdx);
-  }, { once: true });
-  threeGreen.addEventListener("click", function (e) {
-    moveForward(e, greenField, greenPresentIdx);
-  }, { once: true });
-  fourGreen.addEventListener("click", function (e) {
-    moveForward(e, greenField, greenPresentIdx);
-  }, { once: true });
+  let index = parseInt(document.querySelector(".dice").innerHTML);
+  if(index!=6 && !checkForActive(greenPresentIdx)){
+    moves = (moves+1)%4;  
+    setTimeout(5000);
+    updateDiceColor();
+  }
+  else if(index==6){
+    oneGreen.addEventListener("click", inGreen);
+    twoGreen.addEventListener("click", inGreen);
+    threeGreen.addEventListener("click", inGreen);
+    fourGreen.addEventListener("click", inGreen);
+  }
+  else{
+    if(oneGreen.classList.contains("active"))
+      oneGreen.addEventListener("click", inGreen);
+    if(twoGreen.classList.contains("active"))  
+      twoGreen.addEventListener("click", inGreen);
+    if(threeGreen.classList.contains("active"))
+      threeGreen.addEventListener("click", inGreen);
+    if(fourGreen.classList.contains("active"))
+      fourGreen.addEventListener("click", inGreen);
+  }
 }
 
 function yellowEventListner() {
-  oneYellow.addEventListener("click", function (e) {
-    moveForward(e, yellowField, yellowPresentIdx);
-  }, { once: true });
-  twoYellow.addEventListener("click", function (e) {
-    moveForward(e, yellowField, yellowPresentIdx);
-  }, { once: true });
-  threeYellow.addEventListener("click", function (e) {
-    moveForward(e, yellowField, yellowPresentIdx);
-  }, { once: true });
-  fourYellow.addEventListener("click", function (e) {
-    moveForward(e, yellowField, yellowPresentIdx);
-  }, { once: true });
+  let index = parseInt(document.querySelector(".dice").innerHTML);
+  if(index!=6 && !checkForActive(yellowPresentIdx)){
+    moves = (moves+1)%4;  
+    setTimeout(5000);
+    updateDiceColor();
+  }
+  else if(index==6){
+    oneYellow.addEventListener("click", inYellow);
+    twoYellow.addEventListener("click", inYellow);
+    threeYellow.addEventListener("click", inYellow);
+    fourYellow.addEventListener("click", inYellow);
+  }
+  else{
+    if(oneYellow.classList.contains("active"))
+      oneYellow.addEventListener("click", inYellow);
+    if(twoYellow.classList.contains("active"))  
+      twoYellow.addEventListener("click", inYellow);
+    if(threeYellow.classList.contains("active"))
+      threeYellow.addEventListener("click", inYellow);
+    if(fourYellow.classList.contains("active"))
+      fourYellow.addEventListener("click", inYellow);
+  }
 }
 
 function blueEventListner() {
-  oneBlue.addEventListener("click", function (e) {
-    moveForward(e, blueField, bluePresentIdx);
-  }, { once: true });
-  twoBlue.addEventListener("click", function (e) {
-    moveForward(e, blueField, bluePresentIdx);
-  }, { once: true });
-  threeBlue.addEventListener("click", function (e) {
-    moveForward(e, blueField, bluePresentIdx);
-  }, { once: true });
-  fourBlue.addEventListener("click", function (e) {
-    moveForward(e, blueField, bluePresentIdx);
-  }, { once: true });
+  let index = parseInt(document.querySelector(".dice").innerHTML);
+  if(index!=6 && !checkForActive(bluePresentIdx)){
+    moves = (moves+1)%4;  
+    setTimeout(5000);
+    updateDiceColor();
+  }
+  else if(index==6){
+    oneBlue.addEventListener("click", inBlue);
+    twoBlue.addEventListener("click", inBlue);
+    threeBlue.addEventListener("click", inBlue);
+    fourBlue.addEventListener("click", inBlue);
+  }
+  else{
+    if(oneBlue.classList.contains("active"))
+      oneBlue.addEventListener("click", inBlue);
+    if(twoBlue.classList.contains("active"))  
+      twoBlue.addEventListener("click", inBlue);
+    if(threeBlue.classList.contains("active"))
+      threeBlue.addEventListener("click", inBlue);
+    if(fourBlue.classList.contains("active"))
+      fourBlue.addEventListener("click", inBlue);
+  }
 }
-let colorEventListner = [redEventListner, greenEventListner, yellowEventListner, blueEventListner];
 
+
+function removeAllEventListner(){
+  for(let i =0 ;i<allButtons.length;i++){
+    let buttn = allButtons[i];
+    if(i<=3){
+      buttn.removeEventListener("click", inRed);
+    }else if(i<=7) buttn.removeEventListener("click", inGreen);
+    else if(i<=11) buttn.removeEventListener("click", inYellow);
+    else buttn.removeEventListener("click", inBlue);
+  }
+  console.log("removed");
+}
+
+
+let colorEventListner = [redEventListner, greenEventListner, yellowEventListner, blueEventListner];
 
 playDice.addEventListener("click", function (e) {
   let idx = dice.roll();
-  playDice.innerHTML = idx;
-  turn = 1;
+  playDice.innerHTML = idx; 
   colorEventListner[moves]();
-  console.log(moves);
-  moves=(moves+1)%4;
+  // moves = (moves+1)%4;
 });
 
-
+function updateDiceColor(){
+  if(moves==0)
+    diceBg.style.backgroundColor = "tomato";
+  else if(moves==1)
+    diceBg.style.backgroundColor = "green";
+  else if(moves==2)
+    diceBg.style.backgroundColor = "yellow";
+  else  diceBg.style.backgroundColor = "blue";
+}
 
 function moveForward(e, db, presentIdx) {
-  if (turn != 1) {
-    return;
-  }
   let index = parseInt(document.querySelector(".dice").innerHTML);
   if (index == 6 && e.target.classList.contains("inactive")) {
     e.target.classList.remove("inactive");
     e.target.classList.add("active");
+    let pos = updatePosition(e, index, db, presentIdx);
     e.srcElement.style.bottom = db[0].position.bottom;
-    e.srcElement.style.left = db[0].position.left;
-    db[0].present += 1;
-    turn = 0;
+    e.srcElement.style.left = db[0].position.left;   
   }
   else if (e.target.classList.contains("active")) {
     let pos = updatePosition(e, index, db, presentIdx);
     db[pos].present += 1;
     e.srcElement.style.bottom = db[pos].position.bottom;
     e.srcElement.style.left = db[pos].position.left;
-    turn = 0;
   }
+  removeAllEventListner();
+  if (index == 6) moves--;
+  moves = (moves+1)%4;
+  updateDiceColor();
 }
 
 
 function updatePosition(e, index, db, presentIdx) {
   let pos;
   if (e.target.classList.contains("one")) {
-    db[presentIdx[0]].present -= 1;
-    presentIdx[0] += index;
-    pos = presentIdx[0];
+    if (presentIdx[0] == -1){
+      presentIdx[0] = 0;
+      db[0].present += 1;
+    }else{
+      db[presentIdx[0]].present -= 1;
+      presentIdx[0] += index;
+      pos = presentIdx[0];
+    }
   } else if (e.target.classList.contains("two")) {
-    db[presentIdx[1]].present -= 1;
-    presentIdx[1] += index;
-    pos = presentIdx[1];
+    if (presentIdx[1] == -1) {
+      presentIdx[1] = 0;
+      db[0].present += 1;
+    } else {
+      db[presentIdx[1]].present -= 1;
+      presentIdx[1] += index;
+      pos = presentIdx[1];
+    }
   }
   else if (e.target.classList.contains("three")) {
-    db[presentIdx[2]].present -= 1;
-    presentIdx[2] += index;
-    pos = presentIdx[2];
+    if (presentIdx[2] == -1) {
+      presentIdx[2] = 0;
+      db[0].present += 1;
+    } else {
+      db[presentIdx[2]].present -= 1;
+      presentIdx[2] += index;
+      pos = presentIdx[2];
+    }
   }
   else {
-    db[presentIdx[3]].present -= 1;
-    presentIdx[3] += index;
-    pos = presentIdx[3];
+    if (presentIdx[3] == -1) {
+      presentIdx[3] = 0;
+      db[0].present += 1;
+    } else {
+      db[presentIdx[3]].present -= 1;
+      presentIdx[3] += index;
+      pos = presentIdx[3];
+    }
   }
   return pos;
 }
+
