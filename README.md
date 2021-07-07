@@ -1,5 +1,5 @@
 # Ludo_game
-## Popular Indian board game - `**Ludo**`
+## Popular Indian board game - **Ludo**
 Almost every Indian knows how interesting this game is. The game consist of four players trying to pass all the four pawn of same colour of their choice.
 In between they, try to cut and pull back the progress of each others pawn, with tactics, luck and many more.
 
