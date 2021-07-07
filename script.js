@@ -219,7 +219,6 @@ function checkForActive(presentIdx){
 }
 function redEventListner(idx) {
   let index = idx;
-  console.log(idx);
   if(index!=6 && !checkForActive(redPresentIdx)){
     moves = (moves+1)%4;  
     setTimeout(5000);
@@ -245,7 +244,6 @@ function redEventListner(idx) {
 
 function greenEventListner(idx) {
   let index = idx;
-  console.log(idx);
   if(index!=6 && !checkForActive(greenPresentIdx)){
     moves = (moves+1)%4;  
     setTimeout(5000);
@@ -271,7 +269,6 @@ function greenEventListner(idx) {
 
 function yellowEventListner(idx) {
   let index = idx;
-  console.log(idx);
   if(index!=6 && !checkForActive(yellowPresentIdx)){
     moves = (moves+1)%4;  
     setTimeout(5000);
@@ -297,7 +294,6 @@ function yellowEventListner(idx) {
 
 function blueEventListner(idx) {
   let index = idx;
-  console.log(idx);
   if(index!=6 && !checkForActive(bluePresentIdx)){
     moves = (moves+1)%4;  
     setTimeout(5000);
