@@ -1,13 +1,24 @@
 
 // Dice function //
-let playDice = document.querySelector(".dice");
-let diceBg = document.querySelector(".dice-container");
+let redDice = document.querySelector(".red-dice");
+let greenDice = document.querySelector(".green-dice");
+let yellowDice = document.querySelector(".yellow-dice");
+let blueDice = document.querySelector(".blue-dice");
+
+let moves = 0;
+
+
 var dice = {
   sides: 6,
   roll: function () {
     var randomNumber = Math.floor(Math.random() * this.sides) + 1;
     return randomNumber;
   }
+}
+function diceRun(e){
+  let idx = dice.roll()
+  e.target.innerText = parseInt(idx);
+  colorEventListner[moves](idx);
 }
 // ------------ // 
 
@@ -187,8 +198,6 @@ let greenPresentIdx = [-1, -1, -1, -1, "g"];
 let yellowPresentIdx = [-1, -1, -1, -1, "y"];
 let bluePresentIdx = [-1, -1, -1, -1, "b"];
 
-let turn = 0;
-let moves = 0;
 
 function inRed(e) {
   moveForward(e, redField, redPresentIdx);
@@ -208,12 +217,13 @@ function checkForActive(presentIdx){
   }
   return false;
 }
-function redEventListner() {
-  let index = parseInt(document.querySelector(".dice").innerHTML);
+function redEventListner(idx) {
+  let index = idx;
+  console.log(idx);
   if(index!=6 && !checkForActive(redPresentIdx)){
     moves = (moves+1)%4;  
     setTimeout(5000);
-    updateDiceColor();
+    playDiceFun();
   }
   else if(index==6){
     oneRed.addEventListener("click", inRed);
@@ -233,12 +243,13 @@ function redEventListner() {
   }
 }
 
-function greenEventListner() {
-  let index = parseInt(document.querySelector(".dice").innerHTML);
+function greenEventListner(idx) {
+  let index = idx;
+  console.log(idx);
   if(index!=6 && !checkForActive(greenPresentIdx)){
     moves = (moves+1)%4;  
     setTimeout(5000);
-    updateDiceColor();
+    playDiceFun();
   }
   else if(index==6){
     oneGreen.addEventListener("click", inGreen);
@@ -258,12 +269,13 @@ function greenEventListner() {
   }
 }
 
-function yellowEventListner() {
-  let index = parseInt(document.querySelector(".dice").innerHTML);
+function yellowEventListner(idx) {
+  let index = idx;
+  console.log(idx);
   if(index!=6 && !checkForActive(yellowPresentIdx)){
     moves = (moves+1)%4;  
     setTimeout(5000);
-    updateDiceColor();
+    playDiceFun();
   }
   else if(index==6){
     oneYellow.addEventListener("click", inYellow);
@@ -283,12 +295,13 @@ function yellowEventListner() {
   }
 }
 
-function blueEventListner() {
-  let index = parseInt(document.querySelector(".dice").innerHTML);
+function blueEventListner(idx) {
+  let index = idx;
+  console.log(idx);
   if(index!=6 && !checkForActive(bluePresentIdx)){
     moves = (moves+1)%4;  
     setTimeout(5000);
-    updateDiceColor();
+    playDiceFun();
   }
   else if(index==6){
     oneBlue.addEventListener("click", inBlue);
@@ -324,25 +337,44 @@ function removeAllEventListner(){
 
 let colorEventListner = [redEventListner, greenEventListner, yellowEventListner, blueEventListner];
 
-playDice.addEventListener("click", function (e) {
-  let idx = dice.roll();
-  playDice.innerHTML = idx; 
-  colorEventListner[moves]();
-  // moves = (moves+1)%4;
-});
+function playDiceFun(){
+  if(moves==0){
+    redDice.innerText = "Play";
+    redDice.addEventListener("click", diceRun, {once:true});
+    try {
+      blueDice.classList.remove("animateDice"); 
+    } catch(error) {
+      console.log(error);
+    }  
+    redDice.classList.add("animateDice");
+  }
+  else if(moves==1){
+    greenDice.innerText = "Play";
+    greenDice.addEventListener("click", diceRun, {once:true});
+    redDice.classList.remove("animateDice");
+    greenDice.classList.add("animateDice");
+  }else if(moves==2){
+    yellowDice.innerText = "Play";
+    yellowDice.addEventListener("click", diceRun, {once:true});
+    greenDice.classList.remove("animateDice");
+    yellowDice.classList.add("animateDice");
+  }else{
+    blueDice.innerText = "Play";
+    blueDice.addEventListener("click", diceRun, {once:true});
+    yellowDice.classList.remove("animateDice");
+    blueDice.classList.add("animateDice");
+  }
+};
 
-function updateDiceColor(){
-  if(moves==0)
-    diceBg.style.backgroundColor = "tomato";
-  else if(moves==1)
-    diceBg.style.backgroundColor = "green";
-  else if(moves==2)
-    diceBg.style.backgroundColor = "yellow";
-  else  diceBg.style.backgroundColor = "blue";
-}
+playDiceFun();
 
 function moveForward(e, db, presentIdx) {
-  let index = parseInt(document.querySelector(".dice").innerHTML);
+  let index;
+  if(presentIdx[4]=="r"){
+    index = parseInt(redDice.innerText);
+  }else if(presentIdx[4]=="g") index = parseInt(greenDice.innerText);
+  else if(presentIdx[4]=="y") index = parseInt(yellowDice.innerText);
+  else index = parseInt(blueDice.innerText);
   if (index == 6 && e.target.classList.contains("inactive")) {
     e.target.classList.remove("inactive");
     e.target.classList.add("active");
@@ -359,7 +391,7 @@ function moveForward(e, db, presentIdx) {
   removeAllEventListner();
   if (index == 6) moves--;
   moves = (moves+1)%4;
-  updateDiceColor();
+  playDiceFun();
 }
 
 
@@ -407,3 +439,8 @@ function updatePosition(e, index, db, presentIdx) {
   return pos;
 }
 
+
+
+function checkForCut(){
+  
+}
