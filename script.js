@@ -15,7 +15,7 @@ var dice = {
     return randomNumber;
   }
 }
-function diceRun(e){
+function diceRun(e) {
   let idx = dice.roll()
   e.target.innerText = parseInt(idx);
   colorEventListner[moves](idx);
@@ -54,9 +54,16 @@ let twoBlue = document.querySelector(".button.blue.two");
 let threeBlue = document.querySelector(".button.blue.three");
 let fourBlue = document.querySelector(".button.blue.four");
 
-let allButtons = [oneRed, twoRed, threeRed, fourRed, oneGreen, twoGreen, threeGreen, fourGreen, oneYellow, twoYellow, 
+let allButtons = [oneRed, twoRed, threeRed, fourRed, oneGreen, twoGreen, threeGreen, fourGreen, oneYellow, twoYellow,
   threeYellow, fourYellow, oneBlue, twoBlue, threeBlue, fourBlue];
-
+let srtPosBut = []
+  for(let i=0;i<16;i++){
+    let posObject = {
+      bottom: allButtons[i].style.bottom,
+      left: allButtons[i].style.left
+    };
+    srtPosBut.push(posObject);
+  }
 function finalTypeBoxes(selector, db) {
   for (let i = 0; i < finalBox.length; i++) {
     let pos = finalBox[i];
@@ -211,152 +218,151 @@ function inYellow(e) {
 function inBlue(e) {
   moveForward(e, blueField, bluePresentIdx);
 }
-function checkForActive(presentIdx){
-  for(let i =0 ;i<presentIdx.length-1;i++){
-    if(presentIdx[i]!=-1)return true;
+function checkForActive(presentIdx) {
+  for (let i = 0; i < presentIdx.length - 1; i++) {
+    if (presentIdx[i] != -1) return true;
   }
   return false;
 }
 function redEventListner(idx) {
   let index = idx;
-  if(index!=6 && !checkForActive(redPresentIdx)){
-    moves = (moves+1)%4;  
+  if (index != 6 && !checkForActive(redPresentIdx)) {
+    moves = (moves + 1) % 4;
     setTimeout(5000);
     playDiceFun();
   }
-  else if(index==6){
+  else if (index == 6) {
     oneRed.addEventListener("click", inRed);
     twoRed.addEventListener("click", inRed);
     threeRed.addEventListener("click", inRed);
     fourRed.addEventListener("click", inRed);
   }
-  else{
-    if(oneRed.classList.contains("active"))
+  else {
+    if (oneRed.classList.contains("active"))
       oneRed.addEventListener("click", inRed);
-    if(twoRed.classList.contains("active"))  
+    if (twoRed.classList.contains("active"))
       twoRed.addEventListener("click", inRed);
-    if(threeRed.classList.contains("active"))
+    if (threeRed.classList.contains("active"))
       threeRed.addEventListener("click", inRed);
-    if(fourRed.classList.contains("active"))
+    if (fourRed.classList.contains("active"))
       fourRed.addEventListener("click", inRed);
   }
 }
 
 function greenEventListner(idx) {
   let index = idx;
-  if(index!=6 && !checkForActive(greenPresentIdx)){
-    moves = (moves+1)%4;  
+  if (index != 6 && !checkForActive(greenPresentIdx)) {
+    moves = (moves + 1) % 4;
     setTimeout(5000);
     playDiceFun();
   }
-  else if(index==6){
+  else if (index == 6) {
     oneGreen.addEventListener("click", inGreen);
     twoGreen.addEventListener("click", inGreen);
     threeGreen.addEventListener("click", inGreen);
     fourGreen.addEventListener("click", inGreen);
   }
-  else{
-    if(oneGreen.classList.contains("active"))
+  else {
+    if (oneGreen.classList.contains("active"))
       oneGreen.addEventListener("click", inGreen);
-    if(twoGreen.classList.contains("active"))  
+    if (twoGreen.classList.contains("active"))
       twoGreen.addEventListener("click", inGreen);
-    if(threeGreen.classList.contains("active"))
+    if (threeGreen.classList.contains("active"))
       threeGreen.addEventListener("click", inGreen);
-    if(fourGreen.classList.contains("active"))
+    if (fourGreen.classList.contains("active"))
       fourGreen.addEventListener("click", inGreen);
   }
 }
 
 function yellowEventListner(idx) {
   let index = idx;
-  if(index!=6 && !checkForActive(yellowPresentIdx)){
-    moves = (moves+1)%4;  
+  if (index != 6 && !checkForActive(yellowPresentIdx)) {
+    moves = (moves + 1) % 4;
     setTimeout(5000);
     playDiceFun();
   }
-  else if(index==6){
+  else if (index == 6) {
     oneYellow.addEventListener("click", inYellow);
     twoYellow.addEventListener("click", inYellow);
     threeYellow.addEventListener("click", inYellow);
     fourYellow.addEventListener("click", inYellow);
   }
-  else{
-    if(oneYellow.classList.contains("active"))
+  else {
+    if (oneYellow.classList.contains("active"))
       oneYellow.addEventListener("click", inYellow);
-    if(twoYellow.classList.contains("active"))  
+    if (twoYellow.classList.contains("active"))
       twoYellow.addEventListener("click", inYellow);
-    if(threeYellow.classList.contains("active"))
+    if (threeYellow.classList.contains("active"))
       threeYellow.addEventListener("click", inYellow);
-    if(fourYellow.classList.contains("active"))
+    if (fourYellow.classList.contains("active"))
       fourYellow.addEventListener("click", inYellow);
   }
 }
 
 function blueEventListner(idx) {
   let index = idx;
-  if(index!=6 && !checkForActive(bluePresentIdx)){
-    moves = (moves+1)%4;  
+  if (index != 6 && !checkForActive(bluePresentIdx)) {
+    moves = (moves + 1) % 4;
     setTimeout(5000);
     playDiceFun();
   }
-  else if(index==6){
+  else if (index == 6) {
     oneBlue.addEventListener("click", inBlue);
     twoBlue.addEventListener("click", inBlue);
     threeBlue.addEventListener("click", inBlue);
     fourBlue.addEventListener("click", inBlue);
   }
-  else{
-    if(oneBlue.classList.contains("active"))
+  else {
+    if (oneBlue.classList.contains("active"))
       oneBlue.addEventListener("click", inBlue);
-    if(twoBlue.classList.contains("active"))  
+    if (twoBlue.classList.contains("active"))
       twoBlue.addEventListener("click", inBlue);
-    if(threeBlue.classList.contains("active"))
+    if (threeBlue.classList.contains("active"))
       threeBlue.addEventListener("click", inBlue);
-    if(fourBlue.classList.contains("active"))
+    if (fourBlue.classList.contains("active"))
       fourBlue.addEventListener("click", inBlue);
   }
 }
 
 
-function removeAllEventListner(){
-  for(let i =0 ;i<allButtons.length;i++){
+function removeAllEventListner() {
+  for (let i = 0; i < allButtons.length; i++) {
     let buttn = allButtons[i];
-    if(i<=3){
+    if (i <= 3) {
       buttn.removeEventListener("click", inRed);
-    }else if(i<=7) buttn.removeEventListener("click", inGreen);
-    else if(i<=11) buttn.removeEventListener("click", inYellow);
+    } else if (i <= 7) buttn.removeEventListener("click", inGreen);
+    else if (i <= 11) buttn.removeEventListener("click", inYellow);
     else buttn.removeEventListener("click", inBlue);
   }
-  console.log("removed");
 }
 
 
 let colorEventListner = [redEventListner, greenEventListner, yellowEventListner, blueEventListner];
 
-function playDiceFun(){
-  if(moves==0){
+function playDiceFun() {
+  if (moves == 0) {
     redDice.innerText = "Play";
-    redDice.addEventListener("click", diceRun, {once:true});
+    redDice.addEventListener("click", diceRun, { once: true });
     try {
-      blueDice.classList.remove("animateDice"); 
-    } catch(error) {
+      blueDice.classList.remove("animateDice");
+    } catch (error) {
       console.log(error);
-    }  
+    }
     redDice.classList.add("animateDice");
   }
-  else if(moves==1){
+  else if (moves == 1) {
     greenDice.innerText = "Play";
-    greenDice.addEventListener("click", diceRun, {once:true});
+    greenDice.addEventListener("click", diceRun, { once: true });
     redDice.classList.remove("animateDice");
     greenDice.classList.add("animateDice");
-  }else if(moves==2){
+  } else if (moves == 2) {
     yellowDice.innerText = "Play";
-    yellowDice.addEventListener("click", diceRun, {once:true});
+    yellowDice.addEventListener("click", diceRun, { once: true });
     greenDice.classList.remove("animateDice");
     yellowDice.classList.add("animateDice");
-  }else{
+  } else {
     blueDice.innerText = "Play";
-    blueDice.addEventListener("click", diceRun, {once:true});
+    blueDice.addEventListener("click", diceRun, { once: true });
     yellowDice.classList.remove("animateDice");
     blueDice.classList.add("animateDice");
   }
@@ -366,32 +372,35 @@ playDiceFun();
 
 function moveForward(e, db, presentIdx) {
   let index;
-  if(presentIdx[4]=="r"){
+  if (presentIdx[4] == "r") {
     index = parseInt(redDice.innerText);
-  }else if(presentIdx[4]=="g") index = parseInt(greenDice.innerText);
-  else if(presentIdx[4]=="y") index = parseInt(yellowDice.innerText);
+  } else if (presentIdx[4] == "g") index = parseInt(greenDice.innerText);
+  else if (presentIdx[4] == "y") index = parseInt(yellowDice.innerText);
   else index = parseInt(blueDice.innerText);
+
+  let cut;
   if (index == 6 && e.target.classList.contains("inactive")) {
     e.target.classList.remove("inactive");
     e.target.classList.add("active");
     let pos = updatePosition(e, index, db, presentIdx);
     e.srcElement.style.bottom = db[0].position.bottom;
-    e.srcElement.style.left = db[0].position.left;   
+    e.srcElement.style.left = db[0].position.left;
   }
   else if (e.target.classList.contains("active")) {
     let pos = updatePosition(e, index, db, presentIdx);
-    if(pos==56){
+    if (pos == 56) {
       e.target.style.display = "none";
-    }else if(pos<56){
+    } else if (pos < 56) {
       db[pos].present += 1;
       e.srcElement.style.bottom = db[pos].position.bottom;
       e.srcElement.style.left = db[pos].position.left;
+      if(pos<=50 && pos%13!=0)cut = checkForCut(pos, presentIdx);
     }
   }
   removeAllEventListner();
   checkForWin(presentIdx);
-  if (index == 6) moves--;
-  moves = (moves+1)%4;
+  if (index == 6 || cut) moves--;
+  moves = (moves + 1) % 4;
   playDiceFun();
 }
 
@@ -399,21 +408,21 @@ function moveForward(e, db, presentIdx) {
 function updatePosition(e, index, db, presentIdx) {
   let pos;
   if (e.target.classList.contains("one")) {
-    if (presentIdx[0] == -1){
+    if (presentIdx[0] == -1) {
       presentIdx[0] = 0;
       db[0].present += 1;
-    }else{
-      if(presentIdx[0]+index>56)return presentIdx[0] + index;
+    } else {
+      if (presentIdx[0] + index > 56) return presentIdx[0] + index;
       db[presentIdx[0]].present -= 1;
-        presentIdx[0] += index;
-        pos = presentIdx[0];
-      }
+      presentIdx[0] += index;
+      pos = presentIdx[0];
+    }
   } else if (e.target.classList.contains("two")) {
     if (presentIdx[1] == -1) {
       presentIdx[1] = 0;
       db[0].present += 1;
     } else {
-      if(presentIdx[1]+index>56)return presentIdx[1] + index;
+      if (presentIdx[1] + index > 56) return presentIdx[1] + index;
       db[presentIdx[1]].present -= 1;
       presentIdx[1] += index;
       pos = presentIdx[1];
@@ -424,7 +433,7 @@ function updatePosition(e, index, db, presentIdx) {
       presentIdx[2] = 0;
       db[0].present += 1;
     } else {
-      if(presentIdx[2]+index>56)return presentIdx[2] + index;
+      if (presentIdx[2] + index > 56) return presentIdx[2] + index;
       db[presentIdx[2]].present -= 1;
       presentIdx[2] += index;
       pos = presentIdx[2];
@@ -435,7 +444,7 @@ function updatePosition(e, index, db, presentIdx) {
       presentIdx[3] = 0;
       db[0].present += 1;
     } else {
-      if(presentIdx[3]+index>56)return presentIdx[3] + index;
+      if (presentIdx[3] + index > 56) return presentIdx[3] + index;
       db[presentIdx[3]].present -= 1;
       presentIdx[3] += index;
       pos = presentIdx[3];
@@ -444,15 +453,77 @@ function updatePosition(e, index, db, presentIdx) {
   return pos;
 }
 
-function checkForWin(presentIdx){
-  for(let i=0;i<presentIdx.length;i++){
-    if(presentIdx[i]!=56)return;
+function checkForWin(presentIdx) {
+  for (let i = 0; i < presentIdx.length; i++) {
+    if (presentIdx[i] != 56) return;
   }
   winner(presentIdx);
 }
-function winner(presentIdx){
+function winner(presentIdx) {
   console.log(`Winner is ${presentIdx[4]}`);
 }
-function checkForCut(){
-  
+
+
+// Check for cutting algo
+function checkForCut(pos, presentIdx) {
+  let idx;
+  let allDB = [redField, greenField, yellowField, blueField];
+  if(presentIdx[4]=="r")idx=0;
+  else if(presentIdx[4]=="g")idx=1;
+  else if(presentIdx[4]=="y")idx=2;
+  else idx=3;
+
+  for(let i=1;i<=3;i++){
+    let field = (i+idx)%4;
+    if(i==1){
+      let n;
+      if(pos<13) n = 39+pos;
+      else n=pos-13;
+      if(allDB[field][n].present>=1){
+        allDB[field][n].present-=1;
+        closeButton(allDB[field][n].position, field);
+        return true;
+      }
+    }
+    if(i==2){
+      let n;
+      if(pos<26) n = 26+pos;
+      else n=pos-26;
+      if(allDB[field][n].present>=1){
+        allDB[field][n].present-=1;
+        closeButton(allDB[field][n].position, field);
+        return true;
+      }
+    }
+    if(i==3){
+      let n;
+      if(pos<39) n = 13+pos;
+      else n=pos-39;
+      if(allDB[field][n].present>=1){
+        allDB[field][n].present-=1;
+        closeButton(allDB[field][n].position, field);
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function closeButton(positionObject, field){
+  let id;
+  if(field==0)id=0;
+  else if(field==1)id=4;
+  else if(field==2)id=8;
+  else id = 12;
+  for(let i=0;i<4;i++){
+    let idx = i+id;
+    let butnElem = allButtons[idx];
+    let startButPos = srtPosBut[idx];
+    if(positionObject.bottom == butnElem.style.bottom && positionObject.left == butnElem.style.left){
+        butnElem.style.bottom = startButPos.bottom;
+        butnElem.style.left = startButPos.left;
+        butnElem.classList.remove("active");
+        butnElem.classList.add("inactive");
+    }
+  }
 }
