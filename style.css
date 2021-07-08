@@ -137,14 +137,33 @@
 .blue-area {
     position: absolute;
 }
-.animateDice{
+
+.animateDice {
     animation-name: khel;
     animation-duration: 1s;
     animation-iteration-count: infinite;
 }
 
+.title-box {
+    height: 121px;
+    width: 138px;
+    position: absolute;
+    bottom: 268px;
+    left: 307px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #00ffcc 0%, #cc6699 100%);
+}
+
+.message {
+    font-size: 24px;
+    font-weight: bold;
+    color: ghostwhite;
+}
+
 @keyframes khel {
-    50%{
+    50% {
         color: transparent;
     }
 }

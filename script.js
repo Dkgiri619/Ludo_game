@@ -6,7 +6,7 @@ let yellowDice = document.querySelector(".yellow-dice");
 let blueDice = document.querySelector(".blue-dice");
 
 let moves = 0;
-
+let players = 4;
 
 var dice = {
   sides: 6,
@@ -220,14 +220,14 @@ function inBlue(e) {
 }
 function checkForActive(presentIdx) {
   for (let i = 0; i < presentIdx.length - 1; i++) {
-    if (presentIdx[i] != -1) return true;
+    if (presentIdx[i] != -1 && presentIdx[i]!=56) return true;
   }
   return false;
 }
 function redEventListner(idx) {
   let index = idx;
   if (index != 6 && !checkForActive(redPresentIdx)) {
-    moves = (moves + 1) % 4;
+    moves = (moves + 1) % players;
     setTimeout(5000);
     playDiceFun();
   }
@@ -252,7 +252,7 @@ function redEventListner(idx) {
 function greenEventListner(idx) {
   let index = idx;
   if (index != 6 && !checkForActive(greenPresentIdx)) {
-    moves = (moves + 1) % 4;
+    moves = (moves + 1) % players;
     setTimeout(5000);
     playDiceFun();
   }
@@ -277,7 +277,7 @@ function greenEventListner(idx) {
 function yellowEventListner(idx) {
   let index = idx;
   if (index != 6 && !checkForActive(yellowPresentIdx)) {
-    moves = (moves + 1) % 4;
+    moves = (moves + 1) % players;
     setTimeout(5000);
     playDiceFun();
   }
@@ -302,7 +302,7 @@ function yellowEventListner(idx) {
 function blueEventListner(idx) {
   let index = idx;
   if (index != 6 && !checkForActive(bluePresentIdx)) {
-    moves = (moves + 1) % 4;
+    moves = (moves + 1) % players;
     setTimeout(5000);
     playDiceFun();
   }
@@ -377,7 +377,7 @@ function moveForward(e, db, presentIdx) {
   } else if (presentIdx[4] == "g") index = parseInt(greenDice.innerText);
   else if (presentIdx[4] == "y") index = parseInt(yellowDice.innerText);
   else index = parseInt(blueDice.innerText);
-
+  let pass=false;
   let cut;
   if (index == 6 && e.target.classList.contains("inactive")) {
     e.target.classList.remove("inactive");
@@ -390,6 +390,8 @@ function moveForward(e, db, presentIdx) {
     let pos = updatePosition(e, index, db, presentIdx);
     if (pos == 56) {
       e.target.style.display = "none";
+      pass = true;
+      checkForWin(presentIdx);
     } else if (pos < 56) {
       db[pos].present += 1;
       e.srcElement.style.bottom = db[pos].position.bottom;
@@ -399,8 +401,8 @@ function moveForward(e, db, presentIdx) {
   }
   removeAllEventListner();
   checkForWin(presentIdx);
-  if (index == 6 || cut) moves--;
-  moves = (moves + 1) % 4;
+  if (index == 6 || cut || pass) moves--;
+  moves = (moves + 1) % players;
   playDiceFun();
 }
 
@@ -454,13 +456,37 @@ function updatePosition(e, index, db, presentIdx) {
 }
 
 function checkForWin(presentIdx) {
-  for (let i = 0; i < presentIdx.length; i++) {
+  for (let i = 0; i < presentIdx.length-1; i++) {
     if (presentIdx[i] != 56) return;
   }
   winner(presentIdx);
 }
 function winner(presentIdx) {
-  console.log(`Winner is ${presentIdx[4]}`);
+  let winnerColor;
+  let idx;
+  if(presentIdx[4]=="r"){
+    winnerColor="red";
+    idx=0;
+  }
+  else if(presentIdx[4]=="g"){
+    winnerColor="green";
+    idx = 1;
+  }
+  else if(presentIdx[4]=="y"){
+    winnerColor="yellow";
+    idx=2;
+  }
+  else{
+    winnerColor="blue";
+    idx=3;
+  } 
+  console.log(`Winner is ${winnerColor}`);
+  let winnerShow = document.querySelector(".title-box");
+  winnerShow.style.backgroundColor = `${winnerColor}`;
+  let message = document.querySelector(".message");
+  message.innerHTML = `Winner is ${winnerColor}`;
+  colorEventListner.splice(idx,1);
+  players--;
 }
 
 
@@ -479,7 +505,7 @@ function checkForCut(pos, presentIdx) {
       let n;
       if(pos<13) n = 39+pos;
       else n=pos-13;
-      if(allDB[field][n].present>=1){
+      if(n<=50 && allDB[field][n].present>=1){
         allDB[field][n].present-=1;
         closeButton(allDB[field][n].position, field);
         return true;
@@ -489,7 +515,7 @@ function checkForCut(pos, presentIdx) {
       let n;
       if(pos<26) n = 26+pos;
       else n=pos-26;
-      if(allDB[field][n].present>=1){
+      if(n<=50 && allDB[field][n].present>=1){
         allDB[field][n].present-=1;
         closeButton(allDB[field][n].position, field);
         return true;
@@ -499,7 +525,7 @@ function checkForCut(pos, presentIdx) {
       let n;
       if(pos<39) n = 13+pos;
       else n=pos-39;
-      if(allDB[field][n].present>=1){
+      if(n<=50 && allDB[field][n].present>=1){
         allDB[field][n].present-=1;
         closeButton(allDB[field][n].position, field);
         return true;
@@ -511,10 +537,23 @@ function checkForCut(pos, presentIdx) {
 
 function closeButton(positionObject, field){
   let id;
-  if(field==0)id=0;
-  else if(field==1)id=4;
-  else if(field==2)id=8;
-  else id = 12;
+  let presentIdx;
+  if(field==0){
+    id=0;
+    presentIdx = redPresentIdx; 
+  }
+  else if(field==1){
+    id=4;
+    presentIdx = greenPresentIdx;
+  }
+  else if(field==2){
+    id=8;
+    presentIdx = yellowPresentIdx;
+  }
+  else {
+    id = 12;
+    presentIdx = bluePresentIdx;
+  }
   for(let i=0;i<4;i++){
     let idx = i+id;
     let butnElem = allButtons[idx];
@@ -524,6 +563,7 @@ function closeButton(positionObject, field){
         butnElem.style.left = startButPos.left;
         butnElem.classList.remove("active");
         butnElem.classList.add("inactive");
+        presentIdx[i]=-1;
     }
   }
 }
