@@ -57,13 +57,13 @@ let fourBlue = document.querySelector(".button.blue.four");
 let allButtons = [oneRed, twoRed, threeRed, fourRed, oneGreen, twoGreen, threeGreen, fourGreen, oneYellow, twoYellow,
   threeYellow, fourYellow, oneBlue, twoBlue, threeBlue, fourBlue];
 let srtPosBut = []
-  for(let i=0;i<16;i++){
-    let posObject = {
-      bottom: allButtons[i].style.bottom,
-      left: allButtons[i].style.left
-    };
-    srtPosBut.push(posObject);
-  }
+for (let i = 0; i < 16; i++) {
+  let posObject = {
+    bottom: allButtons[i].style.bottom,
+    left: allButtons[i].style.left
+  };
+  srtPosBut.push(posObject);
+}
 function finalTypeBoxes(selector, db) {
   for (let i = 0; i < finalBox.length; i++) {
     let pos = finalBox[i];
@@ -220,7 +220,7 @@ function inBlue(e) {
 }
 function checkForActive(presentIdx) {
   for (let i = 0; i < presentIdx.length - 1; i++) {
-    if (presentIdx[i] != -1 && presentIdx[i]!=56) return true;
+    if (presentIdx[i] != -1 && presentIdx[i] != 56) return true;
   }
   return false;
 }
@@ -377,7 +377,7 @@ function moveForward(e, db, presentIdx) {
   } else if (presentIdx[4] == "g") index = parseInt(greenDice.innerText);
   else if (presentIdx[4] == "y") index = parseInt(yellowDice.innerText);
   else index = parseInt(blueDice.innerText);
-  let pass=false;
+  let pass = false;
   let cut;
   if (index == 6 && e.target.classList.contains("inactive")) {
     e.target.classList.remove("inactive");
@@ -396,7 +396,7 @@ function moveForward(e, db, presentIdx) {
       db[pos].present += 1;
       e.srcElement.style.bottom = db[pos].position.bottom;
       e.srcElement.style.left = db[pos].position.left;
-      if(pos<=50 && pos%13!=0)cut = checkForCut(pos, presentIdx);
+      if (pos <= 50 && pos % 13 != 0) cut = checkForCut(pos, presentIdx);
     }
   }
   removeAllEventListner();
@@ -456,7 +456,7 @@ function updatePosition(e, index, db, presentIdx) {
 }
 
 function checkForWin(presentIdx) {
-  for (let i = 0; i < presentIdx.length-1; i++) {
+  for (let i = 0; i < presentIdx.length - 1; i++) {
     if (presentIdx[i] != 56) return;
   }
   winner(presentIdx);
@@ -464,28 +464,28 @@ function checkForWin(presentIdx) {
 function winner(presentIdx) {
   let winnerColor;
   let idx;
-  if(presentIdx[4]=="r"){
-    winnerColor="red";
-    idx=0;
+  if (presentIdx[4] == "r") {
+    winnerColor = "red";
+    idx = 0;
   }
-  else if(presentIdx[4]=="g"){
-    winnerColor="green";
+  else if (presentIdx[4] == "g") {
+    winnerColor = "green";
     idx = 1;
   }
-  else if(presentIdx[4]=="y"){
-    winnerColor="yellow";
-    idx=2;
+  else if (presentIdx[4] == "y") {
+    winnerColor = "yellow";
+    idx = 2;
   }
-  else{
-    winnerColor="blue";
-    idx=3;
-  } 
+  else {
+    winnerColor = "blue";
+    idx = 3;
+  }
   console.log(`Winner is ${winnerColor}`);
   let winnerShow = document.querySelector(".title-box");
   winnerShow.style.backgroundColor = `${winnerColor}`;
   let message = document.querySelector(".message");
   message.innerHTML = `Winner is ${winnerColor}`;
-  colorEventListner.splice(idx,1);
+  colorEventListner.splice(idx, 1);
   players--;
 }
 
@@ -494,39 +494,39 @@ function winner(presentIdx) {
 function checkForCut(pos, presentIdx) {
   let idx;
   let allDB = [redField, greenField, yellowField, blueField];
-  if(presentIdx[4]=="r")idx=0;
-  else if(presentIdx[4]=="g")idx=1;
-  else if(presentIdx[4]=="y")idx=2;
-  else idx=3;
+  if (presentIdx[4] == "r") idx = 0;
+  else if (presentIdx[4] == "g") idx = 1;
+  else if (presentIdx[4] == "y") idx = 2;
+  else idx = 3;
 
-  for(let i=1;i<=3;i++){
-    let field = (i+idx)%4;
-    if(i==1){
+  for (let i = 1; i <= 3; i++) {
+    let field = (i + idx) % 4;
+    if (i == 1) {
       let n;
-      if(pos<13) n = 39+pos;
-      else n=pos-13;
-      if(n<=50 && allDB[field][n].present>=1){
-        allDB[field][n].present-=1;
+      if (pos < 13) n = 39 + pos;
+      else n = pos - 13;
+      if (n <= 50 && allDB[field][n].present >= 1) {
+        allDB[field][n].present -= 1;
         closeButton(allDB[field][n].position, field);
         return true;
       }
     }
-    if(i==2){
+    if (i == 2) {
       let n;
-      if(pos<26) n = 26+pos;
-      else n=pos-26;
-      if(n<=50 && allDB[field][n].present>=1){
-        allDB[field][n].present-=1;
+      if (pos < 26) n = 26 + pos;
+      else n = pos - 26;
+      if (n <= 50 && allDB[field][n].present >= 1) {
+        allDB[field][n].present -= 1;
         closeButton(allDB[field][n].position, field);
         return true;
       }
     }
-    if(i==3){
+    if (i == 3) {
       let n;
-      if(pos<39) n = 13+pos;
-      else n=pos-39;
-      if(n<=50 && allDB[field][n].present>=1){
-        allDB[field][n].present-=1;
+      if (pos < 39) n = 13 + pos;
+      else n = pos - 39;
+      if (n <= 50 && allDB[field][n].present >= 1) {
+        allDB[field][n].present -= 1;
         closeButton(allDB[field][n].position, field);
         return true;
       }
@@ -535,35 +535,35 @@ function checkForCut(pos, presentIdx) {
   return false;
 }
 
-function closeButton(positionObject, field){
+function closeButton(positionObject, field) {
   let id;
   let presentIdx;
-  if(field==0){
-    id=0;
-    presentIdx = redPresentIdx; 
+  if (field == 0) {
+    id = 0;
+    presentIdx = redPresentIdx;
   }
-  else if(field==1){
-    id=4;
+  else if (field == 1) {
+    id = 4;
     presentIdx = greenPresentIdx;
   }
-  else if(field==2){
-    id=8;
+  else if (field == 2) {
+    id = 8;
     presentIdx = yellowPresentIdx;
   }
   else {
     id = 12;
     presentIdx = bluePresentIdx;
   }
-  for(let i=0;i<4;i++){
-    let idx = i+id;
+  for (let i = 0; i < 4; i++) {
+    let idx = i + id;
     let butnElem = allButtons[idx];
     let startButPos = srtPosBut[idx];
-    if(positionObject.bottom == butnElem.style.bottom && positionObject.left == butnElem.style.left){
-        butnElem.style.bottom = startButPos.bottom;
-        butnElem.style.left = startButPos.left;
-        butnElem.classList.remove("active");
-        butnElem.classList.add("inactive");
-        presentIdx[i]=-1;
+    if (positionObject.bottom == butnElem.style.bottom && positionObject.left == butnElem.style.left) {
+      butnElem.style.bottom = startButPos.bottom;
+      butnElem.style.left = startButPos.left;
+      butnElem.classList.remove("active");
+      butnElem.classList.add("inactive");
+      presentIdx[i] = -1;
     }
   }
 }
