@@ -18,6 +18,9 @@ var dice = {
 function diceRun(e) {
   let idx = dice.roll()
   e.target.innerText = parseInt(idx);
+  let dicePlay = document.createElement("audio");
+  dicePlay.src = "./sounds/ONEDICE.wav";
+  dicePlay.play();
   colorEventListner[moves](idx);
 }
 // ------------ // 
@@ -301,20 +304,19 @@ function greenEventListner(idx) {
     }
   }
   else {
-    if (oneGreen.classList.contains("active"))
-    {
+    if (oneGreen.classList.contains("active")) {
       oneGreen.style.zIndex = 4;
       oneGreen.addEventListener("click", inGreen);
     }
-    if (twoGreen.classList.contains("active")){
+    if (twoGreen.classList.contains("active")) {
       twoGreen.style.zIndex = 4;
       twoGreen.addEventListener("click", inGreen);
     }
-    if (threeGreen.classList.contains("active")){
+    if (threeGreen.classList.contains("active")) {
       threeGreen.style.zIndex = 4;
       threeGreen.addEventListener("click", inGreen);
     }
-    if (fourGreen.classList.contains("active")){
+    if (fourGreen.classList.contains("active")) {
       fourGreen.style.zIndex = 4;
       fourGreen.addEventListener("click", inGreen);
     }
@@ -338,19 +340,19 @@ function yellowEventListner(idx) {
     }
   }
   else {
-    if (oneYellow.classList.contains("active")){
+    if (oneYellow.classList.contains("active")) {
       oneYellow.style.zIndex = 4;
       oneYellow.addEventListener("click", inYellow);
     }
-    if (twoYellow.classList.contains("active")){
+    if (twoYellow.classList.contains("active")) {
       twoYellow.style.zIndex = 4;
       twoYellow.addEventListener("click", inYellow);
     }
-    if (threeYellow.classList.contains("active")){
+    if (threeYellow.classList.contains("active")) {
       threeYellow.style.zIndex = 4;
       threeYellow.addEventListener("click", inYellow);
     }
-    if (fourYellow.classList.contains("active")){
+    if (fourYellow.classList.contains("active")) {
       fourYellow.style.zIndex = 4;
       fourYellow.addEventListener("click", inYellow);
     }
@@ -374,19 +376,19 @@ function blueEventListner(idx) {
     }
   }
   else {
-    if (oneBlue.classList.contains("active")){
+    if (oneBlue.classList.contains("active")) {
       oneBlue.addEventListener("click", inBlue);
       oneBlue.style.zIndex = 4;
     }
-    if (twoBlue.classList.contains("active")){
+    if (twoBlue.classList.contains("active")) {
       twoBlue.addEventListener("click", inBlue);
       twoBlue.style.zIndex = 4;
     }
-    if (threeBlue.classList.contains("active")){
+    if (threeBlue.classList.contains("active")) {
       threeBlue.addEventListener("click", inBlue);
       threeBlue.style.zIndex = 4;
     }
-    if (fourBlue.classList.contains("active")){
+    if (fourBlue.classList.contains("active")) {
       fourBlue.addEventListener("click", inBlue);
       fourBlue.style.zIndex = 4;
     }
@@ -404,7 +406,6 @@ function removeAllEventListner() {
     else buttn.removeEventListener("click", inBlue);
   }
 }
-
 
 let colorEventListner = [redEventListner, greenEventListner, yellowEventListner, blueEventListner];
 
@@ -462,13 +463,26 @@ function moveForward(e, db, presentIdx) {
     if (pos == 56) {
       e.target.style.display = "none";
       pass = true;
+      let passPLay = document.createElement("audio");
+      passPLay.src = "./sounds/pass.mp3";
+      passPLay.play();
       checkForWin(presentIdx);
     } else if (pos < 56) {
       db[pos].present += 1;
       e.srcElement.style.bottom = db[pos].position.bottom;
       e.srcElement.style.left = db[pos].position.left;
       if (pos <= 50 && pos % 13 != 0) cut = checkForCut(pos, presentIdx);
+      if (cut) {
+        let cutPlay = document.createElement("audio");
+        cutPlay.src = "./sounds/cut.mp3";
+        cutPlay.play();
+      }
     }
+  }
+  if (!cut && !pass) {
+    let clickPlay = document.createElement("audio");
+    clickPlay.src = "./sounds/click.mp3";
+    clickPlay.play();
   }
   removeZIndex(presentIdx);
   removeAllEventListner();
@@ -535,30 +549,30 @@ function checkForWin(presentIdx) {
 }
 function winner(presentIdx) {
   let winnerColor;
-  let idx;
+
   if (presentIdx[4] == "r") {
     winnerColor = "red";
-    idx = 0;
   }
   else if (presentIdx[4] == "g") {
     winnerColor = "green";
-    idx = 1;
   }
   else if (presentIdx[4] == "y") {
     winnerColor = "yellow";
-    idx = 2;
   }
   else {
     winnerColor = "blue";
-    idx = 3;
   }
-  console.log(`Winner is ${winnerColor}`);
-  let winnerShow = document.querySelector(".title-box");
-  winnerShow.style.backgroundColor = `${winnerColor}`;
-  let message = document.querySelector(".message");
-  message.innerHTML = `Winner is ${winnerColor}`;
-  colorEventListner.splice(idx, 1);
-  players--;
+  let winnerDiv = document.createElement("div");
+  winnerDiv.classList.add("winner-div");
+  winnerDiv.style.backgroundColor = winnerColor;
+  winnerDiv.innerHTML = ` <div class="medal-icon fas fa-medal"></div>
+  <img src="./images/winner.png" class="winner-text">
+  <div class="congratulation animateWinner">${winnerColor}</div>`;
+  document.body.append(winnerDiv);
+  let winnerPlay = document.createElement("audio");
+  winnerPlay.src = "./sounds/gtaPass.mp3";
+  winnerPlay.play();
+
 }
 
 

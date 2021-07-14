@@ -5,7 +5,6 @@
 }
 
 .main-div {
-    background: wheat;
     width: 1366px;
     height: 657px;
 }
@@ -13,7 +12,6 @@
 .ludo-div {
     position: absolute;
     width: 55%;
-    background: white;
     height: 100%;
     left: 22.5%;
 }
@@ -153,13 +151,57 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, #00ffcc 0%, #cc6699 100%);
+    background: linear-gradient(yellow, red);
 }
 
 .message {
     font-size: 24px;
     font-weight: bold;
     color: ghostwhite;
+}
+
+.winner-div {
+    position: absolute;
+    top: 19px;
+    width: 1100px;
+    height: 620px;
+    left: 119px;
+    z-index: 5;
+    border-radius: 24px;
+    background: red;
+    opacity: .9;
+}
+
+.medal-icon {
+    font-size: 211px;
+    position: relative;
+    left: 460px;
+}
+
+.winner-text {
+    font-size: 66px;
+    top: 234px;
+    position: relative;
+    height: 193px;
+    left: 78px;
+}
+
+.congratulation {
+    position: relative;
+    font-size: 100px;
+    text-align: center;
+    top: 233px;
+}
+
+.animateWinner {
+    animation-name: khel;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+body {
+    background-image: url("./images/unsplash.jpg");
+    background-size: 50% 100%;
 }
 
 @keyframes khel {
