@@ -224,6 +224,30 @@ function checkForActive(presentIdx) {
   }
   return false;
 }
+
+function removeZIndex(presentIdx) {
+  let idx;
+  if (presentIdx[4] == "r") {
+    idx = 0;
+  }
+  else if (presentIdx[4] == "g") {
+    idx = 4;
+  }
+  else if (presentIdx[4] == "y") {
+    idx = 8;
+  }
+  else {
+    idx = 12;
+  }
+  for (let i = 0; i < 4; i++) {
+    let j = i + idx;
+    allButtons[j].style.zIndex = 3;
+  }
+}
+
+
+
+// Buttons Event Listner
 function redEventListner(idx) {
   let index = idx;
   if (index != 6 && !checkForActive(redPresentIdx)) {
@@ -236,16 +260,27 @@ function redEventListner(idx) {
     twoRed.addEventListener("click", inRed);
     threeRed.addEventListener("click", inRed);
     fourRed.addEventListener("click", inRed);
+    for (let i = 0; i < 4; i++) {
+      allButtons[i].style.zIndex = 4;
+    }
   }
   else {
-    if (oneRed.classList.contains("active"))
+    if (oneRed.classList.contains("active")) {
       oneRed.addEventListener("click", inRed);
-    if (twoRed.classList.contains("active"))
+      oneRed.style.zIndex = 4;
+    }
+    if (twoRed.classList.contains("active")) {
       twoRed.addEventListener("click", inRed);
-    if (threeRed.classList.contains("active"))
+      twoRed.style.zIndex = 4;
+    }
+    if (threeRed.classList.contains("active")) {
       threeRed.addEventListener("click", inRed);
-    if (fourRed.classList.contains("active"))
+      threeRed.style.zIndex = 4;
+    }
+    if (fourRed.classList.contains("active")) {
       fourRed.addEventListener("click", inRed);
+      fourRed.style.zIndex = 4;
+    }
   }
 }
 
@@ -261,16 +296,28 @@ function greenEventListner(idx) {
     twoGreen.addEventListener("click", inGreen);
     threeGreen.addEventListener("click", inGreen);
     fourGreen.addEventListener("click", inGreen);
+    for (let i = 4; i < 8; i++) {
+      allButtons[i].style.zIndex = 4;
+    }
   }
   else {
     if (oneGreen.classList.contains("active"))
+    {
+      oneGreen.style.zIndex = 4;
       oneGreen.addEventListener("click", inGreen);
-    if (twoGreen.classList.contains("active"))
+    }
+    if (twoGreen.classList.contains("active")){
+      twoGreen.style.zIndex = 4;
       twoGreen.addEventListener("click", inGreen);
-    if (threeGreen.classList.contains("active"))
+    }
+    if (threeGreen.classList.contains("active")){
+      threeGreen.style.zIndex = 4;
       threeGreen.addEventListener("click", inGreen);
-    if (fourGreen.classList.contains("active"))
+    }
+    if (fourGreen.classList.contains("active")){
+      fourGreen.style.zIndex = 4;
       fourGreen.addEventListener("click", inGreen);
+    }
   }
 }
 
@@ -286,16 +333,27 @@ function yellowEventListner(idx) {
     twoYellow.addEventListener("click", inYellow);
     threeYellow.addEventListener("click", inYellow);
     fourYellow.addEventListener("click", inYellow);
+    for (let i = 8; i < 12; i++) {
+      allButtons[i].style.zIndex = 4;
+    }
   }
   else {
-    if (oneYellow.classList.contains("active"))
+    if (oneYellow.classList.contains("active")){
+      oneYellow.style.zIndex = 4;
       oneYellow.addEventListener("click", inYellow);
-    if (twoYellow.classList.contains("active"))
+    }
+    if (twoYellow.classList.contains("active")){
+      twoYellow.style.zIndex = 4;
       twoYellow.addEventListener("click", inYellow);
-    if (threeYellow.classList.contains("active"))
+    }
+    if (threeYellow.classList.contains("active")){
+      threeYellow.style.zIndex = 4;
       threeYellow.addEventListener("click", inYellow);
-    if (fourYellow.classList.contains("active"))
+    }
+    if (fourYellow.classList.contains("active")){
+      fourYellow.style.zIndex = 4;
       fourYellow.addEventListener("click", inYellow);
+    }
   }
 }
 
@@ -311,16 +369,27 @@ function blueEventListner(idx) {
     twoBlue.addEventListener("click", inBlue);
     threeBlue.addEventListener("click", inBlue);
     fourBlue.addEventListener("click", inBlue);
+    for (let i = 12; i < 16; i++) {
+      allButtons[i].style.zIndex = 4;
+    }
   }
   else {
-    if (oneBlue.classList.contains("active"))
+    if (oneBlue.classList.contains("active")){
       oneBlue.addEventListener("click", inBlue);
-    if (twoBlue.classList.contains("active"))
+      oneBlue.style.zIndex = 4;
+    }
+    if (twoBlue.classList.contains("active")){
       twoBlue.addEventListener("click", inBlue);
-    if (threeBlue.classList.contains("active"))
+      twoBlue.style.zIndex = 4;
+    }
+    if (threeBlue.classList.contains("active")){
       threeBlue.addEventListener("click", inBlue);
-    if (fourBlue.classList.contains("active"))
+      threeBlue.style.zIndex = 4;
+    }
+    if (fourBlue.classList.contains("active")){
       fourBlue.addEventListener("click", inBlue);
+      fourBlue.style.zIndex = 4;
+    }
   }
 }
 
@@ -370,6 +439,8 @@ function playDiceFun() {
 
 playDiceFun();
 
+
+// heart of the game-----------------------------------------------------------------------
 function moveForward(e, db, presentIdx) {
   let index;
   if (presentIdx[4] == "r") {
@@ -399,13 +470,14 @@ function moveForward(e, db, presentIdx) {
       if (pos <= 50 && pos % 13 != 0) cut = checkForCut(pos, presentIdx);
     }
   }
+  removeZIndex(presentIdx);
   removeAllEventListner();
   checkForWin(presentIdx);
   if (index == 6 || cut || pass) moves--;
   moves = (moves + 1) % players;
   playDiceFun();
 }
-
+//-----------------------------------------------------------------------------------
 
 function updatePosition(e, index, db, presentIdx) {
   let pos;
