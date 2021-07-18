@@ -11,9 +11,9 @@
 
 .ludo-div {
     position: absolute;
-    width: 55%;
-    height: 100%;
-    left: 22.5%;
+    width: 752px;
+    height: 657px;
+    left: 305px;
 }
 
 #board {
@@ -109,10 +109,11 @@
 
 .box-div {
     position: absolute;
-    width: 99%;
-    height: 100%;
+    width: 745px;
+    height: 656px;
     left: 0.5%;
     top: 0px;
+    /* background: pink; */
 }
 
 .box {
@@ -168,7 +169,6 @@
     left: 119px;
     z-index: 5;
     border-radius: 24px;
-    background: red;
     opacity: .9;
 }
 
