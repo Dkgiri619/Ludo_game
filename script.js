@@ -25,6 +25,33 @@ function diceRun(e) {
 }
 // ------------ // 
 
+let playerRed;
+let playerGreen;
+let playerYellow;
+let playerBlue;
+
+let rInput = document.querySelector(".r.player");
+let gInput = document.querySelector(".g.player");
+let yInput = document.querySelector(".y.player");
+let bInput = document.querySelector(".b.player");
+
+let submitButt = document.querySelector(".submit");
+submitButt.addEventListener("click", function(){
+  playerRed = rInput.innerHTML;
+  playerGreen = gInput.innerHTML;
+  playerYellow = yInput.innerHTML;
+  playerBlue = bInput.innerHTML;
+  let startPlay = document.createElement("audio");
+  startPlay.src = "./sounds/start.mp3";
+  startPlay.play();
+  document.querySelector(".red-name").innerHTML = playerRed;
+  document.querySelector(".green-name").innerHTML = playerGreen;
+  document.querySelector(".yellow-name").innerHTML = playerYellow;
+  document.querySelector(".blue-name").innerHTML = playerBlue;
+  document.querySelector(".menuDiv").remove();
+  document.querySelector('.enterName').remove();
+
+})
 
 let boxTypes = ["start", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 let finalBox = ["one", "two", "three", "four", "five"];
@@ -549,25 +576,29 @@ function checkForWin(presentIdx) {
 }
 function winner(presentIdx) {
   let winnerColor;
-
+  let winnerName;
   if (presentIdx[4] == "r") {
     winnerColor = "red";
+    winnerName = playerRed;
   }
   else if (presentIdx[4] == "g") {
     winnerColor = "green";
+    winnerName = playerGreen;
   }
   else if (presentIdx[4] == "y") {
     winnerColor = "yellow";
+    winnerName = playerYellow;
   }
   else {
     winnerColor = "blue";
+    winnerName = playerBlue;
   }
   let winnerDiv = document.createElement("div");
   winnerDiv.classList.add("winner-div");
   winnerDiv.style.backgroundColor = winnerColor;
   winnerDiv.innerHTML = ` <div class="medal-icon fas fa-medal"></div>
   <img src="./images/winner.png" class="winner-text">
-  <div class="congratulation animateWinner">${winnerColor}</div>`;
+  <div class="congratulation animateWinner">${winnerName}</div>`;
   document.body.append(winnerDiv);
   let winnerPlay = document.createElement("audio");
   winnerPlay.src = "./sounds/gtaPass.mp3";
